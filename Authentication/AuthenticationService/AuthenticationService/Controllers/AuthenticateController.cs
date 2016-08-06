@@ -9,5 +9,13 @@ namespace AuthenticationService.Controllers
 {
     public class AuthenticateController : ApiController
     {
+        public IHttpActionResult Authenticate(string userName, string Password)
+        {
+            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(Password))
+            {
+                return Unauthorized();
+            }
+            return BadRequest("Internal server error");
+        }
     }
 }
