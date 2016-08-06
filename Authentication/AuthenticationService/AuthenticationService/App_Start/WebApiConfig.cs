@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuthenticationService.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,6 +20,8 @@ namespace AuthenticationService
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            StructuremapWebApi.Start();
         }
     }
 }
