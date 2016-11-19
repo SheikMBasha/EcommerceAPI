@@ -10,7 +10,14 @@ namespace AuthenticationService.BLL
     {
         public bool isAuthenticated(string userName, string Password)
         {
-            throw new NotImplementedException();
+            if(!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(Password))
+            {
+                if(userName == "abc" && Password == "abc")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

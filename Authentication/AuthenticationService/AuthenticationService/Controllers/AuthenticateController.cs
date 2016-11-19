@@ -1,4 +1,5 @@
 ﻿using AuthenticationService.BLL.Interfaces;
+using AuthenticationService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,26 @@ namespace AuthenticationService.Controllers
         {
             _authenticateBll = authenticateBll; 
         }
-        public IHttpActionResult Authenticate(string userName, string Password)
+
+        [AcceptVerbs("GET")]
+        [HttpGet]
+        public IHttpActionResult CheckApi(string input)
         {
-            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(Password))
+            return Json(new { success = true });
+        }
+
+
+        [HttpPost]
+        [ActionName("Login")]
+        public IHttpActionResult Login([FromBody]Credentials credentials )
+        {
+            string username = credentials.userName;
+            string password = credentials.password;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 return Unauthorized();
             }
-            if(_authenticateBll.isAuthenticated(userName, Password))
+            if (_authenticateBll.isAuthenticated(username, password))
             {
                 return Json(new { Success = true });
             }
